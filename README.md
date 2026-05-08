@@ -2,6 +2,11 @@
 
 # 🦞 OpenClaw 実践チュートリアル：AWS EC2 × Azure OpenAI 構築ガイド
 
+> [!IMPORTANT]
+> **ディスク容量に関する注意**
+> Playwrightのブラウザバイナリおよび依存パッケージのインストールは、OSのディスク容量を大幅に消費します。
+> 構築途中の容量不足によるシステム破損を防ぐため、**EC2のEBSボリュームは最低でも 64GB 以上**で構築することを強く推奨します。
+
 AWS EC2 (Ubuntu) 環境に、自律型AIアシスタント「OpenClaw」を構築するためのガイドです。
 セキュアなSSM接続、および LiteLLM を介した Azure OpenAI Service の利用を前提としています。
 
@@ -212,3 +217,12 @@ openclaw cron add --name "DiskCheck" --cron "0 * * * *" --message "system_monito
 ```
 
 これで、あなたがブラウザを閉じていても、OpenClaw が 1 時間ごとに自律的にサーバーの状態をチェックし、ログを残すようになります。
+
+
+# 参考： `playwright-cli`のインストール
+```
+$ sudo npm install -g @playwright/cli@latest
+$ npx playwright install-deps
+$ laywright-cli install --skills # [projectroot]/.claude/以下にmdファイル群がインストールされる。claude codeであればそのまま使えるが、openclawの場合当該パスを明示的にコマンドの中で指定するのがよい。
+```
+
